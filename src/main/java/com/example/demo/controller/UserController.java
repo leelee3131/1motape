@@ -5,6 +5,7 @@ package com.example.demo.controller;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -14,17 +15,24 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.comm.EmailSecure;
+import com.example.demo.domain.UserVO;
+import com.example.demo.service.UserService;
 
+/**
+ * 유저 컨트롤러*/
 @Controller
-public class testController {
-
+public class UserController {
+	
+	@Resource(name = "com.example.demo.service.UserService")
+	UserService userService;
+	
 	@RequestMapping("/test")
 	public String test(Model model) throws Exception{
 		
@@ -32,7 +40,12 @@ public class testController {
 	}
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) throws Exception{
+		UserVO userVO = new UserVO();
+		userVO.setUser_id("jihoon");
+		userVO = userService.newUser(userVO);
 		
+		System.out.println(userVO.getNick_nm());
+
 		
 		return "login";
 	}
@@ -52,6 +65,10 @@ public class testController {
 	}
 	@RequestMapping("/newUserProc")
 	public String newUserProc(HttpServletRequest request) throws Exception{
+		UserVO userVO = new UserVO();
+		
+		EmailSecure emailsecure = new EmailSecure();
+		String emailkey = emailsecure.createEmailKey();
 		String port = "587";
 		Properties props = new Properties();
 		
@@ -75,14 +92,22 @@ public class testController {
 		}));
 		String from = "leelee3150@naver.com";
 		String to = request.getParameter("email");
-		System.out.println(to+"---------1111111");
 		String subject = "Mail Send Test!";
 		String text = "메일 발송 테스트중!!!!";
+		
+		userVO.setUser_email_key(emailkey);
+		userVO.setUser_id("jihoon");
+		
+		if(userVO.getUser_email_key() != null)
+			userService.updateEmailKey(userVO);
+		
+		
+		System.out.println(emailkey);
 		
 		message.setFrom(new InternetAddress(from));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 		message.setSubject(subject);
-		message.setContent(text,"text/html;charset=UTF-8");
+		message.setContent(text + " 인증키 32자리 입니다. 복사하여 인증해주세요. " + emailkey,"text/html;charset=UTF-8");
 		message.setSentDate(new Date());
 		Transport.send(message);
 		return "main";

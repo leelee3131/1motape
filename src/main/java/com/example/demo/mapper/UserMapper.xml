@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+	<select id="selectUser" parameterType = "com.example.demo.domain.UserVO" resultType = "com.example.demo.domain.UserVO">
+		SELECT *
+		FROM tb_user
+		WHERE user_id = #{user_id};
+    </select>
+    
+    
+    <update id="updateEmailKey" parameterType="com.example.demo.domain.UserVO">
+		UPDATE tb_user
+		SET user_email_key = #{user_email_key}
+		WHERE user_id = #{user_id};
+		<!--  ON DUPLICATE KEY UPDATE 
+		user_email_key = #{user_email_key};-->
+	</update>
+
+</mapper>
