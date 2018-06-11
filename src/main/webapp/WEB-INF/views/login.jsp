@@ -13,7 +13,7 @@
 
 <form action="/loginProc" name="login" method="post">
 	<input type="text" id="userId" name="userId" placeholder="Id"><br>
-	<input type="text" id="userPw" name="userPw" placeholder="Password">
+	<input type="password" id="userPw" name="userPw" placeholder="Password">
 	
 	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/loginProc'">로그인</button>
 </form>
