@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.example.demo.mapper.MusicMapper">
-
+	<insert id = "insertMusic" parameterType = "com.example.demo.domain.MusicVO">
+		INSERT INTO tb_music
+		(music_nm, music_code, up_user_id, up_nick_nm, up_date)
+		VALUES
+		(#{music_nm}, #{music_code}, #{up_user_id}, #{up_nick_nm}, now())
+	</insert>
 
 </mapper>

@@ -55,6 +55,7 @@ public class MusicController {
 			musicVO.setUp_nick_nm("jihoon");
 			musicVO.setUp_user_id("leelee31");
 			
+			musicService.insertMusic(musicVO);
 			
 		
 		}

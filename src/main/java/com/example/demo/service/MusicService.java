@@ -13,8 +13,8 @@ public class MusicService {
 	@Resource(name = "com.example.demo.mapper.MusicMapper")
 	MusicMapper musicMapper;
 	
-	public void test() {
-		
+	public void insertMusic(MusicVO musicVO) throws Exception{
+		musicMapper.insertMusic(musicVO);
 	}
 	
 	
