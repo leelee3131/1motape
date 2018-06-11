@@ -15,11 +15,10 @@
 	<input type="text" id="userId" name="userId" placeholder="Id"><br>
 	<input type="password" id="userPw" name="userPw" placeholder="Password">
 	
-	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/loginProc'">로그인</button>
+	<button type="submit" id="btns"  onclick="location.href='/loginProc'">로그인</button>
 </form>
-	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/newUser'">회원가입</button>
-	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/findId'">아이디 찾기</button>
-	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/findPw'">비밀번호 찾기</button>
+	<button type="submit" id="newuser-btns"  onclick="location.href='/newUser'">회원가입</button>
+
 </body>
 </html>
 

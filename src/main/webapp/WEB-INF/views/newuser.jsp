@@ -43,7 +43,7 @@ function emailSecure(){
 	<input type="text" id="emailKey" name="emailKey" placeholder="email 인증키 입력해주세요">
 	</div>
 	
-	<button type="submit" name="btns" class="btn btn-primary" onclick="Location.href='/newUserProc'">완료</button>
+	<button type="submit" name="btns" class="btn btn-primary" onclick="location.href='/newUserProc'">완료</button>
 </form>
 </body>
 </html>
