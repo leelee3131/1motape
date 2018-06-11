@@ -3,6 +3,9 @@ package com.example.demo.controller;
 
 
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -14,8 +17,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,7 @@ public class UserController {
 	@Resource(name = "com.example.demo.service.UserService")
 	UserService userService;
 	
+	
 	@RequestMapping("/test")
 	public String test(Model model) throws Exception{
 		
@@ -40,31 +43,40 @@ public class UserController {
 	}
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) throws Exception{
-		UserVO userVO = new UserVO();
-		userVO.setUser_id("jihoon");
-		userVO = userService.newUser(userVO);
 		
-		System.out.println(userVO.getNick_nm());
-
-		
+		//userVO = userService.newUser(userVO)
 		return "login";
 	}
 	@RequestMapping("/loginProc")
 	public String loginProc(HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		session.getAttribute("userInfo");
+		Map<String, String> map = new HashMap();
+		
+		UserVO userVO = new UserVO();
+		
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
+		System.out.println("-----"+userPw);
+		userVO.setUser_id(userId);
+		userVO.setUser_pw(userPw);
 		
-		System.out.println("id"+userId+"pw"+userPw);
 		
-		return "main";
+		map.put("userId",userId);
+		session.setAttribute("userInfo", map);
+		System.out.println("-----"+userService.login(userVO).getUser_pw().toString());
+		if(userPw.equals(userService.login(userVO).getUser_pw().toString()))
+			return "main";
+		else
+			return "login";
 	}
 	@RequestMapping("/newUser")
 	public String newUser(HttpServletRequest request) throws Exception{
 		
 		return "newuser";
 	}
-	@RequestMapping("/newUserProc")
-	public String newUserProc(HttpServletRequest request) throws Exception{
+	@RequestMapping("/emailProc")
+	public void emailProc(HttpServletRequest request) throws Exception{
 		UserVO userVO = new UserVO();
 		
 		EmailSecure emailsecure = new EmailSecure();
@@ -96,13 +108,11 @@ public class UserController {
 		String text = "메일 발송 테스트중!!!!";
 		
 		userVO.setUser_email_key(emailkey);
-		userVO.setUser_id("jihoon");
-		
-		if(userVO.getUser_email_key() != null)
-			userService.updateEmailKey(userVO);
-		
-		
-		System.out.println(emailkey);
+		HttpSession session = request.getSession();
+		Map<String,String> map = new HashMap();
+		map.put("emailKey", emailkey);
+		session.setAttribute("userInfo", map);
+	
 		
 		message.setFrom(new InternetAddress(from));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
@@ -110,7 +120,27 @@ public class UserController {
 		message.setContent(text + " 인증키 32자리 입니다. 복사하여 인증해주세요. " + emailkey,"text/html;charset=UTF-8");
 		message.setSentDate(new Date());
 		Transport.send(message);
-		return "main";
+		
 	}
 	
+	@RequestMapping("/newUserProc")
+	public String newUserProc(HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		Map<String,String> map = new HashMap();
+		map = (Map<String, String>) session.getAttribute("userInfo");
+		map.put("userId",request.getParameter("userId").toString());
+		session.setAttribute("userInfo", map);
+		
+		UserVO userVO = new UserVO();
+		userVO.setUser_code("001002");
+		userVO.setUser_id(request.getParameter("userId").toString());
+		userVO.setUser_pw(request.getParameter("userPw").toString());
+		userVO.setEmail(request.getParameter("email").toString());
+		userVO.setUser_email_key(request.getParameter("emailKey").toString());
+		userVO.setNick_nm(request.getParameter("userNm").toString());
+		
+		userService.newUser(userVO);
+		
+		return "main";
+	}
 }

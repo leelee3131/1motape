@@ -20,9 +20,11 @@ public class UserService {
 		userMapper.updateEmailKey(userVO);
 	}
 	
-	public UserVO newUser(UserVO userVO) throws Exception{
-		return userMapper.selectUser(userVO);
+	public void newUser(UserVO userVO) throws Exception{
+		userMapper.newUser(userVO);
 	}
-	
+	public UserVO login(UserVO userVO) throws Exception{
+		return userMapper.login(userVO);
+	}
 
 }

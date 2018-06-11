@@ -10,8 +10,12 @@ import com.example.demo.mapper.MusicMapper;
 @Service("com.example.demo.service.MusicService")
 public class MusicService {
 	
-	@Resource(name = "com.example.demo.domain.MusicMapper")
+	@Resource(name = "com.example.demo.mapper.MusicMapper")
 	MusicMapper musicMapper;
+	
+	public void test() {
+		
+	}
 	
 	
 	
