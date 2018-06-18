@@ -90,9 +90,10 @@ width: 20%;
 </head>
 <body>
 <div id="div_top">
-<img onclick="location.href='/main'" style="float :left;" src="http://localhost/1motape/logo1motape.jpg" width=200px; height=100px;></img>
+<img onclick="location.href='/music/list'" style="float :left;" src="http://localhost/1motape/logo1motape.jpg" width=200px; height=100px;></img>
 <input type="text" placeholder="검색">검색
-<div  class="p" style="float :right;"> 이지훈님 환영합니다.
+<div  class="p" style="float :right;"><% String userNm=" "; 
+										 userNm = session.getAttribute("userNm").toString();%><%=userNm %> 님 환영합니다.
 <p class="btn btn-primary" onclick="location.href='/music/insert'">음원 업로드</p>
 </div>
 </div>
@@ -126,8 +127,8 @@ width: 20%;
                   <td>${l.up_nick_nm}</td>
                   <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                   <td>
-                  <form action="/music/down" style="float:left;" id="musicDown" name="musicDown" method="post">
-                  <p type="submit" id="music_no" name="music_no" onclick="Location.href='/music/list/'" value="${l.music_no}">다운</p>
+                  <form action="/music/down" style="float:left;" id="musicDown" name="musicDown" method="post" >
+                  <button type="submit" id="music_no" name="music_no" onclick="Location.href='/music/list/'" value="${l.music_no}">다운</button>
                   </form>
                   </td>
                   <td><audio controls><source src="http://localhost/1motape/${l.music_nm}" type="audio/mpeg" ></audio></td>

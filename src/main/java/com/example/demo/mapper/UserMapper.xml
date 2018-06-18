@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
 	<select id = "login" parameterType = "com.example.demo.domain.UserVO" resultType = "com.example.demo.domain.UserVO">
-		SELECT user_id,user_pw
+		SELECT user_id,user_pw,nick_nm
 		  FROM tb_user
 		 WHERE user_id = #{user_id};
 	</select>

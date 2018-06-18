@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.comm.EmailSecure;
 import com.example.demo.domain.UserVO;
@@ -51,24 +52,29 @@ public class UserController {
 	public String loginProc(HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
 		session.getAttribute("userInfo");
-		Map<String, String> map = new HashMap();
-		
 		UserVO userVO = new UserVO();
 		
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
+		
 		System.out.println("-----"+userPw);
 		userVO.setUser_id(userId);
 		userVO.setUser_pw(userPw);
 		
 		
-		map.put("userId",userId);
-		session.setAttribute("userInfo", map);
 		
-		if(userPw.equals(userService.login(userVO).getUser_pw().toString()))
-			return "main";
+		String oriUserPw = userService.login(userVO).getUser_pw().toString();
+		String userNm = userService.login(userVO).getNick_nm().toString();
+		if(!oriUserPw.equals(null)&&oriUserPw.equals(userPw)) {
+			System.out.println("-----"+oriUserPw);
+			System.out.println("-----"+userNm);
+			session.setAttribute("userId", userId);
+			session.setAttribute("userNm", userNm);
+			
+			return "redirect:/music/list";
+		}
 		else
-			return "login";
+			return "redirect:/music/login";
 	}
 	@RequestMapping("/newUser")
 	public String newUser(HttpServletRequest request) throws Exception{

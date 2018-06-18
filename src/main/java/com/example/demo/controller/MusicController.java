@@ -104,6 +104,39 @@ public class MusicController {
 			System.out.println("ERROR:"+e.getMessage());
 		}
 	}
+	@RequestMapping("/login")
+	private String LogboardList(HttpServletRequest request,Model model)throws Exception { 
+		int curpageno=1;
+		int maxpost=10;
+		if(request.getParameter("pages")!=null)
+			curpageno=Integer.parseInt(request.getParameter("pages"));
+		PageVO paging=new PageVO(curpageno,maxpost);
+		
+		int offset=(paging.getCurpageno()-1)*paging.getMaxpost();
+		
+		ArrayList<MusicVO> page=new ArrayList<MusicVO>();
+		MusicVO musicVO=new MusicVO();
+		musicVO.setOffset(offset);
+		musicVO.setCount(paging.getMaxpost());
+		musicVO.setMusic_code("003001");
+		page.add(musicVO);
+		page=(ArrayList<MusicVO>) musicService.listMusic(musicVO);
+		paging.setCountall(musicService.musicCount(musicVO));
+		
+		paging.makepage();
+		int i=0;
+		while (i<10){
+		    String name = page.get(i).getMusic_path() + page.get(i).getMusic_nm();
+		    System.out.println("경로+이름----"+name);
+		    i++;
+		};
+		
+		
+		model.addAttribute("page",page);
+		model.addAttribute("paging",paging);
+		
+		return "login";
+	}
 	@RequestMapping("/list")
 	private String boardList(HttpServletRequest request,Model model)throws Exception { 
 		int curpageno=1;
