@@ -4,11 +4,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.example.demo.mapper.MusicMapper">
+	<select id="musicDetail" parameterType="com.example.demo.domain.MusicVO" resultType="com.example.demo.domain.MusicVO">
+ 		SELECT *
+ 		FROM tb_music
+ 		WHERE music_no=#{music_no}
+ 	</select>
 	<insert id = "insertMusic" parameterType = "com.example.demo.domain.MusicVO">
 		INSERT INTO tb_music
-		(music_nm, music_code, up_user_id, up_nick_nm, up_date)
+		(ori_music_nm, music_nm, music_code,music_path, up_user_id, up_nick_nm, up_date)
 		VALUES
-		(#{music_nm}, #{music_code}, #{up_user_id}, #{up_nick_nm}, now())
+		(#{ori_music_nm}, #{music_nm}, #{music_code}, #{music_path}, #{up_user_id}, #{up_nick_nm}, now())
 	</insert>
-
+	<select id="listMusic" parameterType="com.example.demo.domain.MusicVO" resultType="com.example.demo.domain.MusicVO">
+    	SELECT * 
+    	FROM tb_music
+		WHERE music_code=#{music_code}
+		ORDER BY music_no DESC
+		LIMIT #{offset},#{count}
+    </select>
+    <select id="musicCount" parameterType="com.example.demo.domain.MusicVO" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_music
+		WHERE music_code=#{music_code}    
+    </select>
 </mapper>

@@ -10,7 +10,9 @@ public class MusicVO {
 	int music_no;
 	//음원 번호
 	String music_nm;
-	//음원 이름
+	//음원 이름(+랜덤스트링32)
+	String ori_music_nm;
+	//음원 이름(원본 이름)
 	String music_code;
 	//음원 코드
 	int music_like;
@@ -31,6 +33,10 @@ public class MusicVO {
 	//지난달까지 조아요 갯수
 	int music_accu;
 	//신고 횟수
-	
-	
+	String music_path;
+	//음원파일 경로
+	int offset;
+	//페이징처리
+	int count;
+	//페이징처리
 }

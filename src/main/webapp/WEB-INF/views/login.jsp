@@ -14,6 +14,7 @@
 <form action="/loginProc" name="login" method="post">
 	<input type="text" id="userId" name="userId" placeholder="Id"><br>
 	<input type="password" id="userPw" name="userPw" placeholder="Password">
+	<br>
 	
 	<button type="submit" id="btns"  onclick="location.href='/loginProc'">로그인</button>
 </form>

@@ -129,6 +129,7 @@ public class UserController {
 		Map<String,String> map = new HashMap();
 		map = (Map<String, String>) session.getAttribute("userInfo");
 		map.put("userId",request.getParameter("userId").toString());
+		map.put("nickNm", "jihoon");
 		session.setAttribute("userInfo", map);
 		
 		UserVO userVO = new UserVO();
