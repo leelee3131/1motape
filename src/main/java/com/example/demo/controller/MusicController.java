@@ -124,10 +124,11 @@ public class MusicController {
 		paging.setCountall(musicService.musicCount(musicVO));
 		
 		paging.makepage();
-		Enumeration<String> params = request.getParameterNames();
-		while (params.hasMoreElements()){
-		    String name = (String)params.nextElement();
-		    System.out.println(name + " : " +request.getParameter(name));
+		int i=0;
+		while (i<10){
+		    String name = page.get(i).getMusic_path() + page.get(i).getMusic_nm();
+		    System.out.println("경로+이름----"+name);
+		    i++;
 		};
 		
 		
@@ -159,7 +160,10 @@ public class MusicController {
 			if(mFile.getSize()==0)
 				continue;
 			System.out.println("filename---->"+fileName);
-			String changName=RandomStringUtils.randomAlphanumeric(32)+"_"+fileName;
+			String[] extendStr = fileName.split("\\.");
+			int count = extendStr.length;
+			String extend = extendStr[count-1];
+			String changName=RandomStringUtils.randomAlphanumeric(32)+"."+extend;
 			String fileUrl="C:\\Users\\leejihoon\\Downloads\\filetest\\";
 			try {
 				mFile.transferTo(new File(fileUrl+changName));

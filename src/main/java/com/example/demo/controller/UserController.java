@@ -36,10 +36,10 @@ public class UserController {
 	UserService userService;
 	
 	
-	@RequestMapping("/test")
+	@RequestMapping("/main")
 	public String test(Model model) throws Exception{
 		
-		return "hello";
+		return "main";
 	}
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) throws Exception{
@@ -64,7 +64,7 @@ public class UserController {
 		
 		map.put("userId",userId);
 		session.setAttribute("userInfo", map);
-		System.out.println("-----"+userService.login(userVO).getUser_pw().toString());
+		
 		if(userPw.equals(userService.login(userVO).getUser_pw().toString()))
 			return "main";
 		else

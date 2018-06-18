@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <script type="text/javascript">
 function urlEncode(path,name){
 	var text = urlencode(path)+urlencode(name)
@@ -15,102 +15,16 @@ function urlEncode(path,name){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>음원리스트</title>
-<style type="text/css">
-
-body { color:#FFFFFF; background-color:#262626; }
-#div_main{
-margin:auto; 
-width:800px;
-}
-
-#div_top{
-width:100%;
-height:100px;
-text-align:center;
-background-color:#262626;
-padding:20px;
-}
-
-#div_menu{
-width:200px;
-float:left;
-height:100%;
-text-align:left;
-background-color:#262626;
-padding:20px;
-}
-
-#div_con{
-width:80%;
-float:left;
-height:100%;
-text-align:left;
-background-color:#262626;
-padding:20px;
-}
-
-#div_bottom{
-margin:auto;
-width:100%;
-height:100px;
-background-color:#262626;
-clear:both;
-padding:20px;
-}
-#div_topmenu{
-display: inline;
-width:100%;
-height:30px;
-margin:5px;
-}
-.test{
-display: flex;
-}
-
-#content{
-with:100%;
-margin:0 auto;
-text-align:center;
-display: inline;
-padding:5px;
-}
-.p{
-padding:20px;
-}
-
-.topmenu{
-text-align:center;
-display: inline;
-pading : 5px 10px 5px 10px;
-float: right; 
-width: 20%;
-
-}
-</style>
+<h1 style="background-color:#FFA500;">음원리스트</h1>
 </head>
 <body>
-<div id="div_top">
-<img onclick="location.href='/main'" style="float :left;" src="http://localhost/1motape/logo1motape.jpg" width=200px; height=100px;></img>
-<input type="text" placeholder="검색">검색
-<div  class="p" style="float :right;"> 이지훈님 환영합니다.
-<p class="btn btn-primary" onclick="location.href='/music/insert'">음원 업로드</p>
-</div>
-</div>
-<div id="div_topmenu">
-<div class="topmenu"><a>최신</a></div>
-<div class="topmenu"><a>탑100</a></div>
-<div class="topmenu"><a>수상</a></div>
-<div class="topmenu"><a>이벤트</a></div>
-</div>
-<div class="test">
-	<div id="div_menu"> 사이드메뉴
-		<div>인기차트
-		</div>
-	</div>
-	
-<div id="div_con" >
-	<div id="content"><h4>음원 리스트</h4></div>
-	<table class="table table-hover">
+<div>
+<h1>음원</h1>
+<div class="container" style="float:right;" >
+	<button class="btn btn-primary" style="float :right;"  onclick="location.href='/music/insert'">음원 업로드</button>
+</div><br>
+<div class="container" style="width: 900px;">
+    <table class="table table-hover">
         <tr>
             <th>번호</th>
             <th>제목</th>
@@ -127,14 +41,14 @@ width: 20%;
                   <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                   <td>
                   <form action="/music/down" style="float:left;" id="musicDown" name="musicDown" method="post">
-                  <p type="submit" id="music_no" name="music_no" onclick="Location.href='/music/list/'" value="${l.music_no}">다운</p>
+                  <button type="submit" id="music_no" name="music_no" onclick="Location.href='/music/list/'" value="${l.music_no}">다운로드</button>
                   </form>
                   </td>
                   <td><audio controls><source src="http://localhost/1motape/${l.music_nm}" type="audio/mpeg" ></audio></td>
               </tr>
           </c:forEach>
     </table>
-
+	
 	<div class="container" style="display: inline-block;">
 <% PageVO paging=(PageVO)request.getAttribute("paging");
 	int curpage=paging.getCurpageno();
@@ -175,7 +89,6 @@ width: 20%;
 </div>
 </div>
 
-<div id="div_bottom">아래쪽</div>
 
 </body>
 </html>
