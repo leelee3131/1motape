@@ -115,7 +115,6 @@ width: 20%;
 	<div id="content"><h4>최신 음원</h4></div>
 	<table class="table table-hover">
         <tr>
-            <th>번호</th>
             <th>제목</th>
             <th>작성자</th>
             <th>날짜</th>
@@ -124,7 +123,6 @@ width: 20%;
         </tr>
             <c:forEach var="l" items="${page}">
           	  <tr>
-              	  <td>${l.music_no}</td>
                   <td>${l.ori_music_nm}</td>
                   <td>${l.up_nick_nm}</td>
                   <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm"/></td>
