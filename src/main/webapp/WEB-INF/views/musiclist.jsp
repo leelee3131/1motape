@@ -92,10 +92,10 @@ width: 20%;
 </div>
 </div>
 <div id="div_topmenu">
-<div class="topmenu"><a>최신</a></div>
-<div class="topmenu"><a>탑100</a></div>
-<div class="topmenu"><a>수상</a></div>
 <div class="topmenu"><a>이벤트</a></div>
+<div class="topmenu"><a>수상</a></div>
+<div class="topmenu"><a>탑100</a></div>
+<div class="topmenu"><a>최신 음원</a></div>
 </div>
 <div class="test">
 	<div id="div_menu"> 사이드메뉴
@@ -104,7 +104,7 @@ width: 20%;
 	</div>
 	
 <div id="div_con" >
-	<div id="content"><h4>음원 리스트</h4></div>
+	<div id="content"><h4>최신 음원</h4></div>
 	<table class="table table-hover">
         <tr>
             <th>번호</th>
@@ -119,7 +119,7 @@ width: 20%;
               	  <td>${l.music_no}</td>
                   <td>${l.ori_music_nm}</td>
                   <td>${l.up_nick_nm}</td>
-                  <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+                  <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm"/></td>
                   <td>
                   <form action="/music/down" style="float:left;" id="musicDown" name="musicDown" method="post" >
                   <button type="submit" id="music_no" name="music_no" onclick="Location.href='/music/list/'" value="${l.music_no}">다운</button>

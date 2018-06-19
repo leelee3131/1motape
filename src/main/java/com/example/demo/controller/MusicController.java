@@ -157,12 +157,7 @@ public class MusicController {
 		paging.setCountall(musicService.musicCount(musicVO));
 		
 		paging.makepage();
-		int i=0;
-		while (i<10){
-		    String name = page.get(i).getMusic_path() + page.get(i).getMusic_nm();
-		    System.out.println("경로+이름----"+name);
-		    i++;
-		};
+		
 		
 		
 		model.addAttribute("page",page);
