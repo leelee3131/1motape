@@ -5,13 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
-<script type="text/javascript">
-function urlEncode(path,name){
-	var text = urlencode(path)+urlencode(name)
-	console.log(text)
-	return text;
-}
-</script>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>음원리스트</title>

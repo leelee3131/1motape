@@ -48,26 +48,25 @@ public class UserController {
 		//userVO = userService.newUser(userVO)
 		return "login";
 	}
+	/**
+	 * 로그인시 세션에 id,nickname저장*/
 	@RequestMapping("/loginProc")
 	public String loginProc(HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
-		session.getAttribute("userInfo");
 		UserVO userVO = new UserVO();
 		
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
-		
-		System.out.println("-----"+userPw);
+		userVO.setUser_id(userId);
+		String oriUserPw = userService.login(userVO).getUser_pw().toString();
+		String userNm = userService.login(userVO).getNick_nm().toString();
+		//System.out.println("-----"+userPw);
 		userVO.setUser_id(userId);
 		userVO.setUser_pw(userPw);
 		
-		
-		
-		String oriUserPw = userService.login(userVO).getUser_pw().toString();
-		String userNm = userService.login(userVO).getNick_nm().toString();
-		if(!oriUserPw.equals(null)&&oriUserPw.equals(userPw)) {
-			System.out.println("-----"+oriUserPw);
-			System.out.println("-----"+userNm);
+		if(!userPw.equals(null)&&oriUserPw.equals(userPw)) {
+//			System.out.println("-----"+oriUserPw);
+//			System.out.println("-----"+userNm);
 			session.setAttribute("userId", userId);
 			session.setAttribute("userNm", userNm);
 			
@@ -81,6 +80,8 @@ public class UserController {
 		
 		return "newuser";
 	}
+	/**
+	 * 메일 인증시에 session에 인증키 저장*/
 	@RequestMapping("/emailProc")
 	public void emailProc(HttpServletRequest request) throws Exception{
 		UserVO userVO = new UserVO();
@@ -110,14 +111,12 @@ public class UserController {
 		}));
 		String from = "leelee3150@naver.com";
 		String to = request.getParameter("email");
-		String subject = "Mail Send Test!";
-		String text = "메일 발송 테스트중!!!!";
+		String subject = "1motape 인증 메일입니다.!";
+		String text = "1motape 메일 인증입니다.\n";
 		
 		userVO.setUser_email_key(emailkey);
 		HttpSession session = request.getSession();
-		Map<String,String> map = new HashMap();
-		map.put("emailKey", emailkey);
-		session.setAttribute("userInfo", map);
+		session.setAttribute("emailkey", emailkey);
 	
 		
 		message.setFrom(new InternetAddress(from));
@@ -132,11 +131,9 @@ public class UserController {
 	@RequestMapping("/newUserProc")
 	public String newUserProc(HttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
-		Map<String,String> map = new HashMap();
-		map = (Map<String, String>) session.getAttribute("userInfo");
-		map.put("userId",request.getParameter("userId").toString());
-		map.put("nickNm", "jihoon");
-		session.setAttribute("userInfo", map);
+		
+		session.setAttribute("userId", request.getParameter("userId").toString());
+		session.setAttribute("nickNm", request.getParameter("nickNm").toString());
 		
 		UserVO userVO = new UserVO();
 		userVO.setUser_code("001002");

@@ -29,10 +29,9 @@ function emailSecure(){
 body { color:#FFFFFF; background-color:#262626; }
 
 #div_main{
-text-align:left;
+text-align:center;
 margin:auto; 
 width:800px;
-padding:20px;
 
 }
 
@@ -46,9 +45,9 @@ padding:20px;
 
 .email_class{
 width:100%;
-text-align:left;
+text-align:center;
 background-color:#262626;
-padding :20px 0px 20px 0px;
+padding :30px;
 }
 </style>
 </head>
@@ -66,16 +65,14 @@ padding :20px 0px 20px 0px;
 	<input type="text" id="nickNm" name="nickNm" placeholder="닉네임을 입력해주세요"><br>
 	</div>
 	<div class = "email_class">
-	<span>
 	<input type="text" id="email" name="email" placeholder="email 입력해주세요">
-	<button id="email-secure-form" name="email-secure-form" onclick="emailSecure()">인증</button><br>
-	</span>
+	<input type="button" id="email-secure-form" name="email-secure-form" onclick="emailSecure()" value="인증"><br>
 	<input type="text" id="emailKey" name="emailKey" placeholder="email 인증키 입력해주세요">
 	</div>
-	</form>
+	
 	<button type="submit" name="btns" class="btn btn-primary" onclick="location.href='/newUserProc'">완료</button>
-
 	<button name="btns" class="btn btn-primary" onclick="location.href='/music/login'">취소</button>
+</form>
 </div>
 
 </body>

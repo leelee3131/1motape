@@ -5,13 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
-<script type="text/javascript">
-function urlEncode(path,name){
-	var text = urlencode(path)+urlencode(name)
-	console.log(text)
-	return text;
-}
-</script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>음원리스트</title>
@@ -76,13 +69,14 @@ padding:5px;
 }
 .p{
 padding:20px;
+display: inline;
 }
 
 .topmenu{
 text-align:center;
 display: inline;
 pading : 5px 10px 5px 10px;
-float: right; 
+float: center; 
 width: 20%;
 
 }
@@ -98,10 +92,11 @@ width: 20%;
 	<input type="password" id="userPw" name="userPw" placeholder="Password">
 	<br>
 	
+	<span>
 	<button type="submit" id="btns"  onclick="location.href='/loginProc'">로그인</button>
 </form>
-	<button type="submit" id="newuser-btns"  onclick="location.href='/newUser'">회원가입</button>
-
+	<a onclick="location.href='/newUser'">회원가입</a>
+	</span>
 </div>
 </div>
 <div id="div_topmenu">
@@ -135,7 +130,7 @@ width: 20%;
                   <td> <fmt:formatDate value="${l.up_date}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
                   <td>
                   <form action="/music/down" style="float:left;" id="musicDown" name="musicDown" method="post">
-                  <button type="submit" id="music_no" name="music_no" onclick="Location.href='/music/login/'" value="${l.music_no}">다운</p>
+                  <button type="submit" id="music_no" name="music_no" onclick="Location.href='/music/login/'" value="${l.music_no}">다운</button>
                   </form>
                   </td>
                   <td><audio controls><source src="http://localhost/1motape/${l.music_nm}" type="audio/mpeg" ></audio></td>
@@ -183,7 +178,11 @@ width: 20%;
 </div>
 </div>
 
-<div id="div_bottom">아래쪽</div>
+<div id="div_bottom">
+	<div float="style: center">
+		
+	</div>
+</div>
 
 </body>
 </html>

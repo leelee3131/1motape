@@ -46,7 +46,7 @@ function fileInsert(){
 </script>
 </head>
 <body>
-<h1 style="background-color:#FFA500;">개인정보</h1>
+<h1 style="background-color:#262626;">음원 업로드</h1>
 <div class="container">
     <form action="/music/insertProc" name="insertForm" method="post" enctype="multipart/form-data">
       <div id="filediv" style="display:none">
