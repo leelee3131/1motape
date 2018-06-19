@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.comm.EmailSecure;
 import com.example.demo.domain.UserVO;
 import com.example.demo.service.UserService;
+import com.mysql.fabric.Response;
 
 /**
  * 유저 컨트롤러*/
@@ -129,22 +132,24 @@ public class UserController {
 	}
 	
 	@RequestMapping("/newUserProc")
-	public String newUserProc(HttpServletRequest request) throws Exception{
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("userId", request.getParameter("userId").toString());
-		session.setAttribute("nickNm", request.getParameter("nickNm").toString());
-		
+	public void newUserProc(HttpServletRequest request, HttpServletResponse response) throws Exception{
+//		HttpSession session = request.getSession();
+//		
+//		session.setAttribute("userId", request.getParameter("userId").toString());
+//		session.setAttribute("nickNm", request.getParameter("nickNm").toString());
+//		
 		UserVO userVO = new UserVO();
 		userVO.setUser_code("001002");
 		userVO.setUser_id(request.getParameter("userId").toString());
 		userVO.setUser_pw(request.getParameter("userPw").toString());
 		userVO.setEmail(request.getParameter("email").toString());
 		userVO.setUser_email_key(request.getParameter("emailKey").toString());
-		userVO.setNick_nm(request.getParameter("userNm").toString());
+		userVO.setNick_nm(request.getParameter("nickNm").toString());
 		
 		userService.newUser(userVO);
-		
-		return "main";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>alert('회원가입이 완료되었습니다. 로그인 해주세요'); location.href='/music/login';</script>");
+		out.flush();
 	}
 }

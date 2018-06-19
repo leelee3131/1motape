@@ -61,6 +61,7 @@ margin:5px;
 display: flex;
 }
 
+
 #content{
 with:100%;
 margin:0 auto;
@@ -80,6 +81,8 @@ float: right;
 width: 20%;
 
 }
+
+
 </style>
 </head>
 <body>

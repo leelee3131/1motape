@@ -173,9 +173,11 @@ public class MusicController {
 	@RequestMapping("/insertProc")
 	private String MusicInsertProc(MultipartHttpServletRequest request) throws Exception{
 		HttpSession session = request.getSession();
-		Map<String,String> map = new HashMap();
-		map = (Map<String, String>) session.getAttribute("userInfo");
+		String userId = "";
+		String nickNm = "";
 		
+		userId = session.getAttribute("userId").toString();
+		nickNm = session.getAttribute("userNm").toString();
 		MusicVO musicVO = new MusicVO();
 		Iterator<String> files=request.getFileNames();
 		
@@ -202,8 +204,8 @@ public class MusicController {
 			musicVO.setOri_music_nm(fileName);
 			musicVO.setMusic_code("003001");
 			musicVO.setMusic_nm(changName);
-			musicVO.setUp_nick_nm("지훈");
-			musicVO.setUp_user_id(map.get("userId"));
+			musicVO.setUp_nick_nm(nickNm);
+			musicVO.setUp_user_id(userId);
 			
 			musicService.insertMusic(musicVO);
 			
