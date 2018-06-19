@@ -98,6 +98,7 @@ width: 20%;
 	</span>
 </div>
 </div>
+<hr color=#0101DF></hr>
 <div id="div_topmenu">
 <div class="topmenu"><a>이벤트</a></div>
 <div class="topmenu"><a>수상</a></div>
@@ -176,7 +177,7 @@ width: 20%;
 	</div>
 </div>
 </div>
-
+<hr color=#0101DF></hr>
 <div id="div_bottom">
 	<div float="style: center">
 		

@@ -56,8 +56,9 @@ padding :20px 0px 20px 0px;
 <div id="div_top">
 <img onclick="location.href='/music/login'" style="float :left;" src="http://localhost/1motape/logo1motape.jpg" width=200px; height=100px;></img>
 </div>
+<hr color=#0101DF></hr>
 <div id="div_main">
-	이메일 인증입니다.
+	회원가입 페이지입니다.
 <form action="/newUserProc" name="newUser" method="post">
 	<div class = "newUser-class">
 	<input type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요"><br>

@@ -91,6 +91,7 @@ width: 20%;
 <p class="btn btn-primary" onclick="location.href='/music/insert'">음원 업로드</p>
 </div>
 </div>
+<hr color=#0101DF></hr>
 <div id="div_topmenu">
 <div class="topmenu"><a>이벤트</a></div>
 <div class="topmenu"><a>수상</a></div>
@@ -169,7 +170,7 @@ width: 20%;
 	</div>
 </div>
 </div>
-
+<hr color=#0101DF></hr>
 <div id="div_bottom">아래쪽</div>
 
 </body>
